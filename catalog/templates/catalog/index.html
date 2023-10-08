@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Домашняя страница</title>
+</head>
+<body>
+    <header>
+        <h1>Добро пожаловать на наш веб-сайт!</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Главная</a></li>
+                <li><a href="/о-нас">О нас</a></li>
+                <li><a href="/услуги">Услуги</a></li>
+                <li><a href="{% url 'catalog:contact_page' %}">Контакты</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section>
+        <h2>О нас</h2>
+        <p>Наша компания занимается...</p>
+    </section>
+
+    <section>
+        <h2>Наши услуги</h2>
+        <ul>
+            <li>Услуга 1</li>
+            <li>Услуга 2</li>
+            <li>Услуга 3</li>
+        </ul>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Название вашей компании</p>
+    </footer>
+</body>
+</html>
