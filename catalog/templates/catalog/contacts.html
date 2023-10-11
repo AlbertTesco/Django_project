@@ -17,10 +17,17 @@
 </header>
 
 <section>
-    <h2>Свяжитесь с нами</h2>
-    <p>Адрес: Улица, Город, Почтовый индекс</p>
-    <p>Телефон: +7 (123) 456-7890</p>
-    <p>Email: info@example.com</p>
+    <h1>Контакты</h1>
+    <ul>
+        {% for contact in contacts %}
+        <li>
+            <strong>{{contact.name}}</strong><br>
+            Email: {{contact.email}}<br>
+            Телефон: {{contact.phone}}<br>
+            Адрес: {{contact.address}}
+        </li><br>
+        {% endfor %}
+    </ul>
 </section>
 
 <section>
