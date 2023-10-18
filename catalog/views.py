@@ -7,20 +7,21 @@ from catalog.models import Product, Contact
 
 
 def get_catalog_main_page(request):
-    latest_products = Product.objects.order_by('-created_date')[:5]
-    for product in latest_products:
-        print(f"Название: {product.name}, Цена: {product.purchase_price}")
-
-    return render(request, 'catalog/index.html')
+    products = Product.objects.all()[:101]
+    context = {
+        "products": products
+    }
+    return render(request, 'catalog/index.html', context)
 
 
 def get_contact_page(request):
     contacts = Contact.objects.all()
-    return render(request, 'catalog/contacts.html', {'contacts': contacts})
+    context = {
+        "contacts": contacts
+    }
+    return render(request, 'catalog/contacts.html', context)
 
-    # if request.method == 'POST':
-    #     name = request.POST.get('name')
-    #     email = request.POST.get('email')
-    #     message = request.POST.get('message')
-    #     print(f'Name: {name}, Email: {email}, Message: {message}')
-    # return render(request, 'catalog/contacts.html')
+
+def product_detail_page(request, pk):
+    product = Product.objects.get(id=pk)
+    return render(request, 'catalog/product_detail.html', {'product': product})

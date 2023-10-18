@@ -1,37 +1,19 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Домашняя страница</title>
-</head>
-<body>
-    <header>
-        <h1>Добро пожаловать на наш веб-сайт!</h1>
-        <nav>
-            <ul>
-                <li><a href="/">Главная</a></li>
-                <li><a href="/о-нас">О нас</a></li>
-                <li><a href="/услуги">Услуги</a></li>
-                <li><a href="{% url 'catalog:contact_page' %}">Контакты</a></li>
-            </ul>
-        </nav>
-    </header>
+{% extends "catalog/base.html" %}
 
-    <section>
-        <h2>О нас</h2>
-        <p>Наша компания занимается...</p>
-    </section>
 
-    <section>
-        <h2>Наши услуги</h2>
-        <ul>
-            <li>Услуга 1</li>
-            <li>Услуга 2</li>
-            <li>Услуга 3</li>
-        </ul>
-    </section>
+{% block content %}
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <h1 class="display-4">SimpleStore</h1>
+        <p class="lead">SimpleStore - тут должно быть пафосное описание этого магазина, но я оставлю это
+            маркетологам</p>
+    </div>
 
-    <footer>
-        <p>&copy; 2023 Название вашей компании</p>
-    </footer>
-</body>
-</html>
+    <div class="container">
+        <div class="row">
+            {% for product in products %}
+                {% include 'catalog/includes/inc_product_card.html' %}
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
