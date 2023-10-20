@@ -71,8 +71,8 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 
-with open('config/password.txt') as f:
-    password = f.read()
+# with open('config/password.txt') as f:
+#     password = f.read()
 
 DATABASES = {
     'default': {
@@ -80,7 +80,7 @@ DATABASES = {
         'HOST': 'localhost',
         'NAME': 'django_db',
         'USER': 'postgres',
-        'PASSWORD': password,
+        'PASSWORD': "izelah69",
         'PORT': '5432',
     }
 }
