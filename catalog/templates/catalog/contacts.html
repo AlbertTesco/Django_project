@@ -40,8 +40,9 @@
                         <h4 class="my-0 font-weight-normal">Свяжитесь с нами</h4>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="" class="form-floating">
+                        <form method="post" action="{% url 'catalog:contact_acept' %}" class="form-floating">
                             {% csrf_token %}
+                            {{ form.as_p }}
                             <div class="mb-3">
                                 <label for="name">Имя</label>
                                 <input type="text" name="name" class="form-control" id="name" placeholder="Ваше имя"

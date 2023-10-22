@@ -1,5 +1,7 @@
+from django.shortcuts import redirect
 from django.views.generic import ListView, DetailView
 
+from catalog.forms import ContactForm
 from catalog.models import Product, Contact
 
 
@@ -45,3 +47,15 @@ class ProductDetailView(DetailView):
     # def product_detail_page(request, pk):
     #     product = Product.objects.get(id=pk)
     #     return render(request, 'catalog/product_detail.html', {'product': product})
+
+
+def contact_view(request):
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data["name"]
+            phone = form.cleaned_data["phone"]
+            message = form.cleaned_data["message"]
+            print(name, phone, message)
+
+    return redirect('catalog:contact_page')
