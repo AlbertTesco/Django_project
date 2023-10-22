@@ -1,0 +1,88 @@
+{% extends "catalog/base.html" %}
+
+
+
+{% block blog_posts %}
+    <style>
+        .btn-primary {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .btn-new {
+            background-color: #ff0000;
+        }
+
+        .blog-posts {
+            padding: 20px;
+            background-color: #f8f8f8;
+        }
+
+        .post-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .post-item {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+        }
+
+        .post-title {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .post-date {
+            color: #888;
+        }
+
+        .post-content {
+            line-height: 1.4;
+        }
+
+        .new-post-button {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+
+
+    <div class="blog-posts">
+        <a class="btn btn-primary btn-new" href="{% url 'blog:post_create' %}">Создать новую статью</a>
+
+        <h1>
+            <strong>Записи блога</strong>
+        </h1>
+        <ul class="post-list">
+            {% for post in posts %}
+                <li class="post-item">
+                    <h2 class="post-title">
+                        {{ post.title }}
+                    </h2>
+                    <p class="post-date">{{ post.created_at|date:"Y-m-d" }}</p>
+                    <p class="post-content">{{ post.content }}</p>
+                    <div class="post-actions">
+                        <a href="{% url 'blog:blog_post_detail' slug=post.slug %}"
+                           class="btn btn-primary">Посмотреть</a>
+                        <a href="{% url 'blog:blog_post_update' slug=post.slug %}" class="btn btn-primary">Изменить</a>
+                        <a href="{% url 'blog:blog_post_delete' slug=post.slug %}" class="btn btn-danger">Удалить</a>
+                    </div>
+                </li>
+
+            {% endfor %}
+        </ul>
+    </div>
+
+
+{% endblock %}
+
+

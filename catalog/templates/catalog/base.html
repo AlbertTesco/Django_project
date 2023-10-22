@@ -2,6 +2,8 @@
 <!doctype html>
 <html lang="en">
 <head>
+
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SimpleStore</title>
@@ -15,12 +17,14 @@
     <nav class="ms-5">
         <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:main_page' %}">Каталог</a>
         <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:contact_page' %}">Контакты</a>
+        <a class="p-2 btn btn-outline-primary" href="{% url 'blog:blog_list' %}">Блог</a>
     </nav>
 </div>
 {% block product_detail %}{% endblock %}
 {% block content %}{% endblock %}
 {% block contacts %}{% endblock %}
-
+{% block blog_posts %}{% endblock %}
+{% block creat_blog_post %}{% endblock %}
 
 <div class="container">
 
