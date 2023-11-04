@@ -3,7 +3,7 @@ from django.conf.urls.static import static
 from django.urls import path
 
 from catalog.apps import CatalogConfig
-from catalog.views import CatalogMainPageView, ContactPageView, ProductDetailView, contact_view
+from catalog.views import CatalogMainPageView, ContactPageView, ProductDetailView, contact_view, create_product
 
 app_name = CatalogConfig.name
 urlpatterns = [
@@ -11,5 +11,6 @@ urlpatterns = [
                   path('contacts/contact_acept/', contact_view, name='contact_acept'),
                   path('contacts/', ContactPageView.as_view(), name='contact_page'),
                   path('product/<int:pk>/', ProductDetailView.as_view(), name='product_detail'),
+                  path('product/create/', create_product, name='create_product'),
 
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
