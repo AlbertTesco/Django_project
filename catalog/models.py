@@ -35,6 +35,20 @@ class Product(models.Model):
         return self.name
 
 
+class Version(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="Продукт")
+    version_num = models.FloatField(verbose_name="Номер версии")
+    version_name = models.CharField(max_length=100, verbose_name="Название версии")
+    is_active = models.BooleanField(default=False, verbose_name='Признак активности')
+
+    def __str__(self):
+        return f'{self.version_num}-{self.version_name}'
+
+    class Meta:
+        verbose_name = "Версия"
+        verbose_name_plural = "Версии"
+
+
 class Contact(models.Model):
     name = models.CharField(max_length=100, verbose_name="Имя")
     email = models.EmailField(verbose_name="Эл. почта")

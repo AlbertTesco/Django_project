@@ -1,6 +1,6 @@
 from django import forms
 
-from catalog.models import Product
+from catalog.models import Product, Version
 from catalog.validators import validate_prohibited_words
 
 
@@ -35,3 +35,23 @@ class ProductForm(forms.ModelForm):
             'category': forms.Select(attrs={'class': 'my-select-class', 'required': True}),
             'purchase_price': forms.NumberInput(attrs={'class': 'my-number-input-class', 'required': True})
         }
+
+
+class VersionForm(forms.ModelForm):
+    class Meta:
+        model = Version
+        fields = ['product', 'version_num', 'version_name', 'is_active']
+
+    widgets = {
+        'product': forms.Select(attrs={'class': 'my-input-class'}),
+        'version_num': forms.NumberInput(attrs={'class': 'form-control'}),
+        'version_name': forms.TextInput(attrs={'class': 'my-input-class'}),
+        'is_active': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+    }
+
+    labels = {
+        'product': 'Продукт',
+        'version_num': 'Номер версии',
+        'version_name': 'Название версии',
+        'is_active': 'Активная версия',
+    }

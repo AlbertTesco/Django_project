@@ -1,0 +1,106 @@
+{% extends "catalog/base.html" %}
+
+{% block product_update %}
+    <style>
+        .my-product-form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f0f0f0;
+        }
+
+        /* Стилизация текстовых полей */
+        .my-input-class {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* Стилизация текстового поля с классом 'my-textarea-class' */
+        .my-textarea-class {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* Стилизация поля загрузки файла */
+        .my-file-input-class {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* Стилизация выпадающего списка (Select) */
+        .my-select-class {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* Стилизация числового поля (NumberInput) */
+        .my-number-input-class {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* Стилизация поля даты (DateInput) */
+        .my-date-input-class {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* Стилизация кнопки отправки */
+        .my-submit-button {
+            background-color: #3f0f91;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Стилизация ошибок валидации */
+        .error-message {
+            color: #ff0000;
+        }
+    </style>
+
+    <div class="container">
+        <div class="col-12 row-cols-1">
+            <form method="post">
+                <div class="col-md-6">
+                    <div class="my-product-form">
+                        <h1>Информация о товаре</h1>
+
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button class="btn btn-primary my-submit-button" type="submit">Сохранить</button>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="my-product-form">
+                        <h1>Информация о версии</h1>
+
+                        {{ formset.management_form }}
+                        {% for form in formset.forms %}
+                            {{ form.as_p }}
+                        {% endfor %}
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
