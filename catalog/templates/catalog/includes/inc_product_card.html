@@ -10,8 +10,10 @@
             <ul class="list-unstyled mt-3 mb-4 text-start m-3">
                 <li>- {{ product.description|truncatechars:100 }}</li>
                 <li>- {{ product.category }}</li>
-                {% if product_versions.product == product.name %}
-                    <li>- Последняя активная версия: {{ product_versions.version_num }}</li>
+                {% if product.active_version is not None %}
+                    <li>- Последняя активная версия: {{ product.active_version }}</li>
+                {% else %}
+                    <li>- Последняя активная версия: "Нет информации"</li>
                 {% endif %}
             </ul>
             <div class="text-center">

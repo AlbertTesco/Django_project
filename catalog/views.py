@@ -13,20 +13,6 @@ class CatalogMainPageView(ListView):
     template_name = 'catalog/index.html'
     context_object_name = 'products'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        product_versions = {}
-        for product in context['products']:
-            last_active_version = Version.objects.filter(product=product, is_active=True).order_by(
-                '-version_num').first()
-            product_versions[product] = last_active_version
-
-        context['product_versions'] = product_versions
-
-        print(product_versions)
-        return context
-
 
 class ContactPageView(ListView):
     """

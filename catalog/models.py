@@ -31,6 +31,10 @@ class Product(models.Model):
         verbose_name = "Продукт"
         verbose_name_plural = "Продукты"
 
+    @property
+    def active_version(self):
+        return Version.objects.filter(is_active=True, product=self).first()
+
     def __str__(self):
         return self.name
 
