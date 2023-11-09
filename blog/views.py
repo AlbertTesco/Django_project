@@ -10,11 +10,7 @@ class BlogPostListView(ListView):
     template_name = 'blog/blog_posts_list.html'
     context_object_name = "posts"
     extra_context = {"title": "Блог"}
-    # FBV
-    # def blog_post_list(request):
-    #     # posts = BlogPost.objects.filter(is_published=True)
-    #     posts = BlogPost.objects.all()
-    #     return render(request, 'blog/blog_posts_list.html', {'posts': posts})
+
 
 
 class BlogPostCreatView(CreateView):
