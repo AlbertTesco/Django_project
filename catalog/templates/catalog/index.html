@@ -18,7 +18,9 @@
     <div class="container">
         <div class="row">
             {% for product in products %}
-                {% include 'catalog/includes/inc_product_card.html' %}
+                {% if product.is_published %}
+                    {% include 'catalog/includes/inc_product_card.html' %}
+                {% endif %}
             {% endfor %}
 
             {% if user.is_authenticated %}

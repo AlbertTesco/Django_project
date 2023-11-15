@@ -19,8 +19,13 @@
             <div class="text-center">
                 <button type="button" class="btn btn-lg btn-block btn-outline-primary">Купить</button>
                 <a href="{% url 'catalog:delete_product' product.id %}" class="btn btn-lg btn-block btn-outline-danger">Удалить</a>
-                <a href="{% url 'catalog:update_product' product.id %}"
-                   class="btn btn-lg btn-block btn-light">Изменить</a>
+                {% if perms.catalog.set_is_published and perms.catalog.set_description and perms.catalog.set_category %}
+                    <a href="{% url 'catalog:moder_update_product' product.id %}"
+                       class="btn btn-lg btn-block btn-light">Изменить</a>
+                {% elif product.owner == user %}
+                    <a href="{% url 'catalog:update_product' product.id %}"
+                       class="btn btn-lg btn-block btn-light">Изменить</a>
+                {% endif %}
             </div>
         </div>
     </div>

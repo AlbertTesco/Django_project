@@ -143,3 +143,5 @@ EMAIL_PORT = 465
 EMAIL_USE_SSL = True
 EMAIL_HOST_USER = 'artem-dedov2012@yandex.ru'
 EMAIL_HOST_PASSWORD = 'qhmyyeukbicibkcy'
+
+LOGIN_URL = '/users/'
