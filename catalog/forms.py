@@ -19,6 +19,27 @@ class ProductForm(forms.ModelForm):
                                    'required': True
                                }
                            ))
+
+    class Meta:
+        model = Product
+        fields = ['name', 'image', 'purchase_price']
+        exclude = ['owner']
+        widgets = {
+            'image': forms.ClearableFileInput(attrs={'class': 'my-file-input-class', 'required': False}),
+            'category': forms.Select(attrs={'class': 'my-select-class', 'required': True}),
+            'purchase_price': forms.NumberInput(attrs={'class': 'my-number-input-class', 'required': True})
+        }
+
+
+class ProductFormCreate(forms.ModelForm):
+    name = forms.CharField(validators=[validate_prohibited_words],
+                           label="Название",
+                           widget=forms.TextInput(
+                               attrs={
+                                   'class': 'my-input-class',
+                                   'required': True
+                               }
+                           ))
     description = forms.CharField(validators=[validate_prohibited_words],
                                   label="Описание",
                                   widget=forms.Textarea(
@@ -34,6 +55,24 @@ class ProductForm(forms.ModelForm):
             'image': forms.ClearableFileInput(attrs={'class': 'my-file-input-class', 'required': False}),
             'category': forms.Select(attrs={'class': 'my-select-class', 'required': True}),
             'purchase_price': forms.NumberInput(attrs={'class': 'my-number-input-class', 'required': True})
+        }
+
+
+class ModerProductForm(forms.ModelForm):
+    description = forms.CharField(validators=[validate_prohibited_words],
+                                  label="Описание",
+                                  widget=forms.Textarea(
+                                      attrs={'class': 'my-textarea-class',
+                                             'required': True
+                                             }
+                                  ))
+
+    class Meta:
+        model = Product
+        fields = ['description', 'category', 'is_published']
+        exclude = ['owner']
+        widgets = {
+            'category': forms.Select(attrs={'class': 'my-select-class', 'required': True})
         }
 
 
