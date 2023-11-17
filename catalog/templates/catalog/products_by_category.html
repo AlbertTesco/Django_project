@@ -1,0 +1,27 @@
+{% extends "catalog/base.html" %}
+
+{% block content %}
+    <style>
+        .card {
+            height: 100%;
+            border-radius: 15px;
+        }
+    </style>
+
+    <div class="container">
+        <div class="row">
+            <div class="offset-md-1">
+                <h1>Продукты категории "{{ category.name }}"</h1>
+
+                <div class="container">
+                    <div class="row">
+                        {% for product in products %}
+                            {% include 'catalog/includes/inc_product_card.html' %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,5 +1,45 @@
-{% extends "catalog/base.html" %}
+{#{% extends "catalog/base.html" %}#}
+{##}
+{##}
+{#{% block content %}#}
+{#    <style>#}
+{#        .card {#}
+{#            height: 100%;#}
+{#            border-radius: 15px;#}
+{#        }#}
+{#    </style>#}
+{##}
+{#    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">#}
+{#        <h1 class="display-4">SimpleStore</h1>#}
+{#        <p class="lead">SimpleStore - тут должно быть пафосное описание этого магазина, но я оставлю это#}
+{#            маркетологам</p>#}
+{#    </div>#}
+{##}
+{#    <div class="container">#}
+{#        <div class="row">#}
+{#            {% for product in products %}#}
+{#                {% if product.is_published %}#}
+{#                    {% include 'catalog/includes/inc_product_card.html' %}#}
+{#                {% endif %}#}
+{#            {% endfor %}#}
+{##}
+{#            {% if user.is_authenticated %}#}
+{#                <div class="col-3 mb-4">#}
+{#                    <div class="card">#}
+{#                        <div class="card-body d-flex align-items-center justify-content-center">#}
+{#                            <a href="{% url 'catalog:create_product' %}" class="btn btn-primary btn-lg">Добавить новый#}
+{#                                товар</a>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            {% endif %}#}
+{##}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#{% endblock %}#}
 
+{% extends "catalog/base.html" %}
 
 {% block content %}
     <style>
@@ -9,31 +49,49 @@
         }
     </style>
 
-    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-        <h1 class="display-4">SimpleStore</h1>
-        <p class="lead">SimpleStore - тут должно быть пафосное описание этого магазина, но я оставлю это
-            маркетологам</p>
-    </div>
-
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
-            {% for product in products %}
-                {% if product.is_published %}
-                    {% include 'catalog/includes/inc_product_card.html' %}
-                {% endif %}
-            {% endfor %}
+            <div class="col-md-auto">
+                <!-- Боковая панель со списком категорий -->
+                <div class="list-group">
+                    <a href="#" class="list-group-item list-group-item-action active">
+                        Категории
+                    </a>
+                    {% for category in categories %}
+                        <a href="{% url 'catalog:products_by_category' category.slug %}"
+                           class="list-group-item list-group-item-action">{{ category.name }}</a>
+                    {% endfor %}
+                </div>
+            </div>
 
-            {% if user.is_authenticated %}
-                <div class="col-3 mb-4">
-                    <div class="card">
-                        <div class="card-body d-flex align-items-center justify-content-center">
-                            <a href="{% url 'catalog:create_product' %}" class="btn btn-primary btn-lg">Добавить новый
-                                товар</a>
-                        </div>
+            <div class="col-md-9">
+                <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+                    <h1 class="display-4">SimpleStore</h1>
+                    <p class="lead">SimpleStore - тут должно быть пафосное описание этого магазина, но я оставлю это
+                        маркетологам</p>
+                </div>
+
+                <div class="container">
+                    <div class="row">
+                        {% for product in products %}
+                            {% if product.is_published %}
+                                {% include 'catalog/includes/inc_product_card.html' %}
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if user.is_authenticated %}
+                            <div class="col-3 mb-4">
+                                <div class="card">
+                                    <div class="card-body d-flex align-items-center justify-content-center">
+                                        <a href="{% url 'catalog:create_product' %}" class="btn btn-primary btn-lg">Добавить
+                                            новый товар</a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
-            {% endif %}
-
+            </div>
         </div>
     </div>
 

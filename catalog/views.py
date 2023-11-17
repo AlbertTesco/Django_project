@@ -1,15 +1,19 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import inlineformset_factory
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic import ListView, DetailView
 
 from catalog.forms import ContactForm, ProductForm, VersionForm, ModerProductForm, ProductFormCreate
-from catalog.models import Product, Contact, Version
+from catalog.models import Product, Contact, Version, Category
+from catalog.services import cache_category
 
 
 class CatalogMainPageView(LoginRequiredMixin, ListView):
+    """
+    Отображение главной страницы с продуктами
+    """
     model = Product
     template_name = 'catalog/index.html'
     context_object_name = 'products'
@@ -17,8 +21,17 @@ class CatalogMainPageView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
         context_data['user'] = self.request.user
+        context_data['categories'] = cache_category()
 
         return context_data
+
+
+def get_products_by_category(request, category_slug):
+    """Отображение продуктов по категориям"""
+    category = get_object_or_404(Category, slug=category_slug)
+    products = Product.objects.filter(category=category)
+
+    return render(request, 'catalog/products_by_category.html', {'products': products, 'category': category})
 
 
 class ContactPageView(LoginRequiredMixin, ListView):
